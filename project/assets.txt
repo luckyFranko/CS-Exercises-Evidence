@@ -1,0 +1,29 @@
+The LabOps environment has five main assets that support the operation of the enrollment helper system. Each asset has a different purpose and would have different impact if compromised.
+
+Helpdesk Mailbox (helpdesk@labops.example)
+
+The helpdesk mailbox is used by support staff to communicate with students and system administrators so the system may contain personal information, support requests and operational messages. If attacker gained access to the mailbox they could impersonate helpdesk employees, send phishing messages, collect information from users or access sensitive communications. *** Contains personal data potentially.
+
+SSH Account
+
+The SSH account is used by administrators for remotely access and manage the Linux server. If attacker got access to SSH account, they could log in to server, change files, install malicious software, steal data etc... Although the account itself does not store personal data, it may provide access to systems that contain it. 
+*** Contains personal data: Indirectly.
+
+GPG Release Key
+
+GPG release key is used to digitally sign software releases and verify their authenticity. Users rely on this key to confirm that downloaded files genuinely originate from LabOps and if the key would be compromised attacker could sign malicious files and distribute them as if they were legitimate. The key does not directly contain personal information. 
+***Contains personal data: No.
+
+install.sh
+
+The install.sh script is distributed to students and other users as part of the enrollment helper system. If attacker modified the script, malicious commands could be executed on users systems and appear to be a normal installation process.
+*** Contains personal data: No.
+
+secrets.env
+
+The secrets.env file stores a database password used by the application. If the file is exposed attacker can get unauthorized access to the database and becausee the database is assumed to store student information, compromising this credential could result in exposure of personal data. 
+*** Contains personal data: Indirectly, through access to the database.
+
+Personal Data Considerations
+
+The database protected by secrets.env is assumed to contain student personal data and represents the most sensitive part of the system. The helpdesk mailbox may contain personal information submitted by students. Both the SSH account and the database credentials provide access to systems where personal data is stored, making them critical assets from a security and privacy perspective.
